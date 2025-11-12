@@ -1,10 +1,19 @@
 <template>
-    <div class="p-4">
+    <div>
         <router-view />
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+window.onpageshow = function (event) {
+    if (
+        event.persisted ||
+        performance.getEntriesByType("navigation")[0].type === "back_forward"
+    ) {
+        window.location.reload();
+    }
+};
+</script>
 
 <style>
 body {
