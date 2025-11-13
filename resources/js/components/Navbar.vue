@@ -28,13 +28,13 @@
             </router-link>
 
             <router-link
-                to="/peminjaman"
+                to="/type"
                 class="text-white hover:text-gray-600 hover:bg-white rounded-md p-1 font-medium"
                 :class="{
-                    'text-white font-semibold': $route.path === '/peminjaman',
+                    'text-white font-semibold': $route.path === '/type',
                 }"
             >
-                Peminjaman
+                Type
             </router-link>
             <router-link
                 to="/user"

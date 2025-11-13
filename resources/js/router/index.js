@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "../pages/Dashboard.vue";
 import Login from "../pages/Login.vue";
 import User from "../pages/User.vue";
+import Type from "../pages/Type.vue";
 
 const routes = [
     {
@@ -19,6 +20,13 @@ const routes = [
         path: "/user",
         name: "user",
         component: User,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/type",
+        name: "type",
+        component: () => Type,
+        meta: { requiresAuth: true },
     },
 ];
 
@@ -39,13 +47,10 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-// ⬇️ Tambahkan ini di bawah, untuk mendeteksi navigasi "back"
 window.addEventListener("pageshow", (event) => {
-    // Kalau user klik tombol back dan halaman diambil dari cache
     if (event.persisted) {
         const token = localStorage.getItem("token");
         if (!token) {
-            // Kalau token sudah tidak ada, langsung paksa ke login
             router.push("/login");
         }
     }
