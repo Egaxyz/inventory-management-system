@@ -5,6 +5,9 @@ import User from "../pages/User.vue";
 import Type from "../pages/Type.vue";
 import TypeForm from "../pages/FormPage/TypeForm.vue";
 import EditTypeForm from "../pages/FormPage/EditTypeForm.vue";
+import Supplier from "../pages/Supplier.vue";
+import SupplierForm from "../pages/FormPage/SupplierForm.vue";
+import EditSupplierForm from "../pages/FormPage/EditSupplierForm.vue";
 
 const routes = [
     {
@@ -22,6 +25,24 @@ const routes = [
         path: "/user",
         name: "user",
         component: User,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/supplier",
+        name: "supplier",
+        component: Supplier,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/supplier/tambah",
+        name: "supplierForm",
+        component: SupplierForm,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/supplier/edit/:id",
+        name: "supplierFormEdit",
+        component: EditSupplierForm,
         meta: { requiresAuth: true },
     },
     {
