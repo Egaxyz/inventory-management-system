@@ -3,6 +3,8 @@ import Dashboard from "../pages/Dashboard.vue";
 import Login from "../pages/Login.vue";
 import User from "../pages/User.vue";
 import Type from "../pages/Type.vue";
+import TypeForm from "../pages/FormPage/TypeForm.vue";
+import EditTypeForm from "../pages/FormPage/EditTypeForm.vue";
 
 const routes = [
     {
@@ -25,7 +27,19 @@ const routes = [
     {
         path: "/type",
         name: "type",
-        component: () => Type,
+        component: Type,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/type/tambah",
+        name: "typeForm",
+        component: TypeForm,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/type/edit/:id",
+        name: "typeFormEdit",
+        component: EditTypeForm,
         meta: { requiresAuth: true },
     },
 ];

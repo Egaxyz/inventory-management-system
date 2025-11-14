@@ -88,32 +88,30 @@
                 <button
                     :disabled="loading"
                     type="submit"
-                    class="w-full bg-slate-500 hover:bg-white hover:text-slate-600 text-white font-semibold py-2 rounded-lg transition-all"
+                    class="w-full bg-slate-500 hover:bg-white hover:text-slate-600 text-white font-semibold py-2 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
-                    <template v-if="loading">
-                        <svg
-                            class="animate-spin h-5 w-5 text-white mr-2"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <circle
-                                class="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                stroke-width="4"
-                            ></circle>
-                            <path
-                                class="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                            ></path>
-                        </svg>
-                        Logging in...
-                    </template>
-                    <template v-else> Login </template>
+                    <svg
+                        v-if="loading"
+                        class="animate-spin h-5 w-5 mr-2 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <circle
+                            class="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            stroke-width="4"
+                        ></circle>
+                        <path
+                            class="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        ></path>
+                    </svg>
+                    <span>{{ loading ? "Loading..." : "Login" }}</span>
                 </button>
 
                 <!-- Pesan error -->
@@ -156,12 +154,18 @@ const login = async () => {
             localStorage.setItem("user", JSON.stringify(response.data.user));
             router.push("/");
             console.log(response.data);
+        } else {
+            errorMessage.value =
+                response.data?.message ||
+                "Login gagal, periksa kembali data Anda.";
         }
     } catch (error) {
         console.error(error.response);
         errorMessage.value =
             error.response?.data?.message ||
             "Login gagal, periksa kembali data Anda.";
+    } finally {
+        loading.value = false;
     }
 };
 </script>

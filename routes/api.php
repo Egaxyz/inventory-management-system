@@ -14,5 +14,10 @@ Route::get('/login', [AuthController::class, 'showLoginForm']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
-Route::get('/type', [TypeController::class, 'index']);
 Route::get('/user', [UserController::class, 'index']);
+
+Route::get('/type', [TypeController::class, 'index']);
+Route::post('/type', [TypeController::class, 'store']);
+Route::get('/type/{id}', [TypeController::class, 'show']);
+Route::put('/type/{id}', [TypeController::class, 'update']);
+Route::delete('/type/{id}', [TypeController::class, 'destroy']);
