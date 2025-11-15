@@ -8,6 +8,9 @@ import EditTypeForm from "../pages/FormPage/EditTypeForm.vue";
 import Supplier from "../pages/Supplier.vue";
 import SupplierForm from "../pages/FormPage/SupplierForm.vue";
 import EditSupplierForm from "../pages/FormPage/EditSupplierForm.vue";
+import ProductForm from "../pages/FormPage/ProductForm.vue";
+import Product from "../pages/Product.vue";
+import EditProductForm from "../pages/FormPage/EditProductForm.vue";
 
 const routes = [
     {
@@ -25,43 +28,61 @@ const routes = [
         path: "/user",
         name: "user",
         component: User,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, role: "admin" },
     },
     {
         path: "/supplier",
         name: "supplier",
         component: Supplier,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, role: "admin" },
     },
     {
         path: "/supplier/tambah",
         name: "supplierForm",
         component: SupplierForm,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, role: "admin" },
     },
     {
         path: "/supplier/edit/:id",
         name: "supplierFormEdit",
         component: EditSupplierForm,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, role: "admin" },
     },
     {
         path: "/type",
         name: "type",
         component: Type,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, role: "admin" },
     },
     {
         path: "/type/tambah",
         name: "typeForm",
         component: TypeForm,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, role: "admin" },
     },
     {
         path: "/type/edit/:id",
         name: "typeFormEdit",
         component: EditTypeForm,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, role: "admin" },
+    },
+    {
+        path: "/produk",
+        name: "produk",
+        component: Product,
+        meta: { requiresAuth: true, role: "admin" },
+    },
+    {
+        path: "/produk/tambah",
+        name: "produkForm",
+        component: ProductForm,
+        meta: { requiresAuth: true, role: "admin" },
+    },
+    {
+        path: "/produk/edit/:id",
+        name: "produkFormEdit",
+        component: EditProductForm,
+        meta: { requiresAuth: true, role: "admin" },
     },
 ];
 
@@ -72,6 +93,11 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (to.meta.role && user.role != to.meta.role) {
+        return next({ name: "forbidden" });
+    }
 
     if (to.meta.requiresAuth && !token) {
         next("/login");

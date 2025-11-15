@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierControllerr;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
@@ -28,3 +29,9 @@ Route::post('/supplier', [SupplierControllerr::class, 'store']);
 Route::get('/supplier/{id}', [SupplierControllerr::class, 'show']);
 Route::put('/supplier/{id}', [SupplierControllerr::class, 'update']);
 Route::delete('/supplier/{id}', [SupplierControllerr::class, 'destroy']);
+
+Route::get('/produk', [ProductController::class, 'index']);
+Route::post('/produk', [ProductController::class, 'store']);
+Route::get('/produk/{id}', [ProductController::class, 'show']);
+Route::put('/produk/{id}', [ProductController::class, 'update']);
+Route::delete('/produk/{id}', [ProductController::class, 'destroy']);

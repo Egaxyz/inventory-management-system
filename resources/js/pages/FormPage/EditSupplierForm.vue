@@ -75,16 +75,16 @@
                     <div class="flex items-center space-x-2">
                         <button
                             type="submit"
-                            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-60"
+                            class="px-4 py-1 mt-2 bg-blue-600 text-white rounded-md hover:bg-blue-800 disabled:opacity-60"
                             :disabled="saving"
                         >
-                            {{ saving ? "Menyimpan..." : "Simpan Perubahan" }}
+                            {{ saving ? "Menyimpan..." : "Simpan" }}
                         </button>
 
                         <button
                             type="button"
                             @click="goBack"
-                            class="text-sm text-gray-600 underline"
+                            class="text-sm text-white underline bg-gray-500 px-4 py-1 mt-2 rounded-md hover:bg-white hover:text-gray-500"
                         >
                             Batal
                         </button>
