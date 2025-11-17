@@ -1,5 +1,8 @@
-<script setup lang="ts">
+<script setup>
+import { ref } from "vue";
 import Navbar from "../components/Navbar.vue";
+
+const user = ref(JSON.parse(localStorage.getItem("user")));
 </script>
 
 <template>
@@ -9,8 +12,11 @@ import Navbar from "../components/Navbar.vue";
             <router-view />
         </main>
 
-        <h2 class="text-xl font-semibold">
-            Selamat datang di sistem peminjaman barang
-        </h2>
+        <div v-if="user.role === 'admin'" class="p-4 bg-blue-100">
+            Menu khusus Admin
+        </div>
+        <div v-if="user.role === 'staff'" class="p-4 bg-blue-100">
+            Menu khusus Staff
+        </div>
     </div>
 </template>

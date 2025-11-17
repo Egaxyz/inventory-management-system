@@ -53,7 +53,9 @@ const deleteType = async (id) => {
                     :key="type.id"
                     class="hover:bg-gray-50"
                 >
-                    <td class="border px-4 py-2">{{ type.id }}</td>
+                    <td class="border px-4 py-2">
+                        {{ types.indexOf(type) + 1 }}
+                    </td>
                     <td class="border px-4 py-2">{{ type.type_code }}</td>
                     <td class="border px-4 py-2">{{ type.type_name }}</td>
                     <td class="border px-4 py-2">{{ type.description }}</td>

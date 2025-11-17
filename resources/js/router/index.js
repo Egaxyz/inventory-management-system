@@ -11,6 +11,8 @@ import EditSupplierForm from "../pages/FormPage/EditSupplierForm.vue";
 import ProductForm from "../pages/FormPage/ProductForm.vue";
 import Product from "../pages/Product.vue";
 import EditProductForm from "../pages/FormPage/EditProductForm.vue";
+import Peminjaman from "../pages/Peminjaman.vue";
+import PeminjamanForm from "../pages/FormPage/PeminjamanForm.vue";
 
 const routes = [
     {
@@ -77,6 +79,24 @@ const routes = [
         name: "produkForm",
         component: ProductForm,
         meta: { requiresAuth: true, role: "admin" },
+    },
+    {
+        path: "/produk/edit/:id",
+        name: "produkFormEdit",
+        component: EditProductForm,
+        meta: { requiresAuth: true, role: "admin" },
+    },
+    {
+        path: "/peminjaman",
+        name: "peminjaman",
+        component: Peminjaman,
+        meta: { requiresAuth: true, role: "staff" },
+    },
+    {
+        path: "/peminjaman/tambah",
+        name: "peminjamanForm",
+        component: PeminjamanForm,
+        meta: { requiresAuth: true, role: "staff" },
     },
     {
         path: "/produk/edit/:id",

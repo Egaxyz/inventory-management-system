@@ -144,6 +144,7 @@ const login = async () => {
 
     try {
         loading.value = true;
+        await axios.get("http://localhost:8000/sanctum/csrf-cookie");
         const response = await axios.post("http://localhost:8000/api/login", {
             email: email.value,
             password: password.value,

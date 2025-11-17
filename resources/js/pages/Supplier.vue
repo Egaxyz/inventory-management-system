@@ -56,7 +56,10 @@ const deleteSupplier = async (id) => {
                     :key="supplier.id"
                     class="hover:bg-gray-50"
                 >
-                    <td class="border px-4 py-2">{{ supplier.id }}</td>
+                    <td class="border px-4 py-2">
+                        {{ suppliers.indexOf(supplier) + 1 }}
+                    </td>
+
                     <td class="border px-4 py-2">
                         {{ supplier.supplier_name }}
                     </td>

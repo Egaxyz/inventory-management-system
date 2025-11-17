@@ -18,13 +18,24 @@
             </router-link>
 
             <router-link
-                to="/barang"
+                to="/produk"
                 class="text-white hover:text-gray-600 hover:bg-white rounded-md p-1 font-medium"
                 :class="{
-                    'text-white font-semibold': $route.path === '/barang',
+                    'text-white font-semibold': $route.path === '/produk',
                 }"
+                v-if="user.role == 'admin'"
             >
-                Barang
+                Produk
+            </router-link>
+            <router-link
+                to="/supplier"
+                class="text-white hover:text-gray-600 hover:bg-white rounded-md p-1 font-medium"
+                :class="{
+                    'text-white font-semibold': $route.path === '/supplier',
+                }"
+                v-if="user.role == 'admin'"
+            >
+                Supplier
             </router-link>
 
             <router-link
@@ -33,6 +44,7 @@
                 :class="{
                     'text-white font-semibold': $route.path === '/type',
                 }"
+                v-if="user.role == 'admin'"
             >
                 Type
             </router-link>
@@ -42,10 +54,14 @@
                 :class="{
                     'text-white font-semibold': $route.path === '/user',
                 }"
+                v-if="user.role == 'admin'"
             >
                 User
             </router-link>
-            <div class="relative inline-block dropdown-container">
+            <div
+                class="relative inline-block dropdown-container"
+                v-if="user.role == 'staff'"
+            >
                 <button
                     class="text-white hover:text-gray-600 hover:bg-white rounded-md p-1 font-medium flex items-center gap-1"
                     @click="isOpen = !isOpen"
@@ -83,14 +99,14 @@
                         class="block px-4 py-2 text-gray-600 hover:bg-gray-400 hover:rounded-lg hover:text-white"
                         @click="isOpen = false"
                     >
-                        Barang Masuk
+                        Peminjaman
                     </router-link>
                     <router-link
-                        to="/peminjaman/tambah"
+                        to="/barang-masuk"
                         class="block px-4 py-2 text-gray-600 hover:bg-gray-400 hover:rounded-lg hover:text-white"
                         @click="isOpen = false"
                     >
-                        Peminjaman Barang
+                        Barang Masuk
                     </router-link>
                 </div>
             </div>
@@ -111,6 +127,8 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const isOpen = ref(false);
+
+const user = ref(JSON.parse(localStorage.getItem("user")));
 
 const handleClickOutside = (event) => {
     const dropdown = document.querySelector(".dropdown-container");

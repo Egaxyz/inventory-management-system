@@ -53,6 +53,7 @@
                 class="w-full border rounded-lg p-2 focus:ring focus:ring-slate-300"
                 required
             >
+                <option value="" disabled>Pilih Status Supplier</option>
                 <option value="active">Aktif</option>
                 <option value="inactive">Tidak Aktif</option>
             </select>

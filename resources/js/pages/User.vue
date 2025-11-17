@@ -22,7 +22,7 @@ onMounted(async () => {
         <table class="w-full border-collapse border border-gray-300">
             <thead>
                 <tr class="bg-gray-100">
-                    <th class="border px-4 py-2">ID</th>
+                    <th class="border px-4 py-2">No</th>
                     <th class="border px-4 py-2">Nama Pengguna</th>
                     <th class="border px-4 py-2">Email</th>
                     <th class="border px-4 py-2">Peran</th>
@@ -34,7 +34,9 @@ onMounted(async () => {
                     :key="user.id"
                     class="hover:bg-gray-50"
                 >
-                    <td class="border px-4 py-2">{{ user.id }}</td>
+                    <td class="border px-4 py-2">
+                        {{ users.indexOf(user) + 1 }}
+                    </td>
                     <td class="border px-4 py-2">{{ user.name }}</td>
                     <td class="border px-4 py-2">{{ user.email }}</td>
                     <td class="border px-4 py-2">{{ user.role || "User" }}</td>
