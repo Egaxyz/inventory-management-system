@@ -47,7 +47,7 @@ class ItemIncomingController extends Controller
 
         // Cek apakah stok cukup atau produk berstatus tidak tersedia
         $status = strtolower((string) $product->product_status);
-        if ($product->qty < $data['qty_incoming_items'] || $status === 'unavailable' || $status === 'unabilable') {
+        if ($status === 'unavailable' || $status === 'unavailable') {
             return response()->json([
                 'success' => false,
                 'message' => 'Stok tidak cukup atau produk tidak tersedia untuk dipinjam'

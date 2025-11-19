@@ -24,15 +24,6 @@
                     v-for="product in products"
                     :key="product.id"
                     :value="product.id"
-                    :disabled="
-                        product.qty == 0 ||
-                        product.product_status === 'unavailable'
-                    "
-                    :class="{
-                        'text-gray-400 bg-gray-100':
-                            product.qty == 0 ||
-                            product.product_status === 'unavailable',
-                    }"
                 >
                     {{ product.product_code }} -
                     {{ product.product_name }} (Stok: {{ product.qty }} |
