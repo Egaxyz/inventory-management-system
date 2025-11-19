@@ -23,7 +23,7 @@ const formatDate = (value) => {
     return isNaN(date.getTime()) ? "" : date.toLocaleString("id-ID");
 };
 
-const deleteBorrow = async (id) => {
+const deleteData = async (id) => {
     if (confirm("Yakin ingin menghapus peminjaman ini?")) {
         try {
             await axios.delete(`http://localhost:8000/api/peminjaman/${id}`);
@@ -98,11 +98,18 @@ const deleteBorrow = async (id) => {
 
                     <td class="border px-4 py-2">
                         <RouterLink
-                            :to="`/produk/edit/${borrow.id}`"
+                            :to="`/peminjaman/edit/${borrow.id}`"
                             class="px-2 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500"
                         >
                             Edit
                         </RouterLink>
+                        <!-- Depends on need -->
+                        <!-- <button
+                            @click="deleteData(borrow.id)"
+                            class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                        >
+                            Hapus
+                        </button> -->
                     </td>
                 </tr>
             </tbody>

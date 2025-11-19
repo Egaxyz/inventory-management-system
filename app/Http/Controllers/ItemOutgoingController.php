@@ -60,4 +60,54 @@ class ItemOutgoingController extends Controller
             'message' => 'Data berhasil dibuat'
         ], 200);
     }
+    public function show($id)
+    {
+        $data = itemsOutgoing::find($id);
+        if(!$data){
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ada'
+            ]);
+        }
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+    public function update(Request $request, $id)
+    {
+        $transaction = itemsOutgoing::find($id);
+
+        if(!$transaction){
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan',
+            ], 404);
+        }
+        $transaction->product_id = $request->product_id;
+        $transaction->qty_outgoing_items = $request->qty_outgoing_items;
+        $transaction->outgoing_date = $request->outgoing_date;
+        $transaction->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diperbarui',
+            'data' => $transaction
+        ], 200);
+    }
+    public function destroy($id)
+    {
+        $transaction = itemsOutgoing::where('id',$id)->first();
+        if(!$transaction){
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan'
+            ], 404);
+        }
+        $transaction->delete();
+        return response()->json([
+            'data'=>$transaction,
+            'success' => true,
+            'message' => 'Data berhasil dihapus'
+        ]);
+    }
 }

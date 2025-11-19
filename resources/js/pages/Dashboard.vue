@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import Navbar from "../components/Navbar.vue";
 
-const user = ref(JSON.parse(localStorage.getItem("user")));
+const user = ref(JSON.parse(sessionStorage.getItem("user")));
 </script>
 
 <template>

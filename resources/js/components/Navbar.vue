@@ -128,7 +128,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const isOpen = ref(false);
 
-const user = ref(JSON.parse(localStorage.getItem("user")));
+const user = ref(JSON.parse(sessionStorage.getItem("user")));
 
 const handleClickOutside = (event) => {
     const dropdown = document.querySelector(".dropdown-container");
@@ -146,7 +146,7 @@ onBeforeUnmount(() => {
 });
 const logout = async () => {
     try {
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
 
         if (token) {
             await axios.post(
@@ -161,8 +161,8 @@ const logout = async () => {
         }
 
         // Hapus token & data user
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("user");
 
         // Hapus header Authorization default axios
         delete axios.defaults.headers.common["Authorization"];

@@ -13,6 +13,7 @@ import Product from "../pages/Product.vue";
 import EditProductForm from "../pages/FormPage/EditProductForm.vue";
 import Peminjaman from "../pages/Peminjaman.vue";
 import PeminjamanForm from "../pages/FormPage/PeminjamanForm.vue";
+import EditPeminjamanForm from "../pages/FormPage/EditPeminjamanForm.vue";
 
 const routes = [
     {
@@ -99,10 +100,10 @@ const routes = [
         meta: { requiresAuth: true, role: "staff" },
     },
     {
-        path: "/produk/edit/:id",
-        name: "produkFormEdit",
-        component: EditProductForm,
-        meta: { requiresAuth: true, role: "admin" },
+        path: "/peminjaman/edit/:id",
+        name: "peminjamanFormEdit",
+        component: EditPeminjamanForm,
+        meta: { requiresAuth: true, role: "staff" },
     },
 ];
 
@@ -112,8 +113,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
+    const token = sessionStorage.getItem("token");
+    const user = JSON.parse(sessionStorage.getItem("user"));
 
     if (to.meta.role && user.role != to.meta.role) {
         return next({ name: "forbidden" });
@@ -130,7 +131,7 @@ router.beforeEach((to, from, next) => {
 
 window.addEventListener("pageshow", (event) => {
     if (event.persisted) {
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         if (!token) {
             router.push("/login");
         }
