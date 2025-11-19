@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ItemIncomingController;
 use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierControllerr;
@@ -44,3 +45,11 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/peminjaman/{id}', [ItemOutgoingController::class, 'show']);
 Route::put('/peminjaman/{id}', [ItemOutgoingController::class, 'update']);
 Route::delete('/peminjaman/{id}', [ItemOutgoingController::class, 'destroy']);
+
+Route::get('/barang-masuk', [ItemIncomingController::class, 'index']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/barang-masuk', [ItemIncomingController::class, 'store']);
+});
+Route::get('/barang-masuk/{id}', [ItemIncomingController::class, 'show']);
+Route::put('/barang-masuk/{id}', [ItemIncomingController::class, 'update']);
+Route::delete('/barang-masuk/{id}', [ItemIncomingController::class, 'destroy']);

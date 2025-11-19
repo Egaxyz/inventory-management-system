@@ -14,6 +14,9 @@ import EditProductForm from "../pages/FormPage/EditProductForm.vue";
 import Peminjaman from "../pages/Peminjaman.vue";
 import PeminjamanForm from "../pages/FormPage/PeminjamanForm.vue";
 import EditPeminjamanForm from "../pages/FormPage/EditPeminjamanForm.vue";
+import BarangMasuk from "../pages/BarangMasuk.vue";
+import BarangMasukForm from "../pages/FormPage/BarangMasukForm.vue";
+import EditBarangMasuk from "../pages/FormPage/EditBarangMasuk.vue";
 
 const routes = [
     {
@@ -103,6 +106,24 @@ const routes = [
         path: "/peminjaman/edit/:id",
         name: "peminjamanFormEdit",
         component: EditPeminjamanForm,
+        meta: { requiresAuth: true, role: "staff" },
+    },
+    {
+        path: "/barang-masuk",
+        name: "barang-masuk",
+        component: BarangMasuk,
+        meta: { requiresAuth: true, role: "staff" },
+    },
+    {
+        path: "/barang-masuk/tambah",
+        name: "barangMasukForm",
+        component: BarangMasukForm,
+        meta: { requiresAuth: true, role: "staff" },
+    },
+    {
+        path: "/barang-masuk/edit/:id",
+        name: "barangMasukFormEdit",
+        component: EditBarangMasuk,
         meta: { requiresAuth: true, role: "staff" },
     },
 ];

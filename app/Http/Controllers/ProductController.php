@@ -25,7 +25,7 @@ class ProductController extends Controller
         $product->product_name = $request->product_name; 
         $product->product_code = $productGNTCode;
         $product->product_status = $request->product_status; 
-        $product->qty = $request->qty; 
+        $product->qty = 0; 
         $product->price = $request->price; 
         $product->description = $request->description; 
         $product->save();

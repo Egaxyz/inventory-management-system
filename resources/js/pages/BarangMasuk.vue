@@ -3,22 +3,24 @@ import Navbar from "@/components/Navbar.vue";
 import { onMounted, ref } from "vue";
 import axios from "axios";
 
-const products = ref([]);
+const borrows = ref([]);
 
 onMounted(async () => {
     try {
-        const response = await axios.get("http://localhost:8000/api/produk");
-        products.value = response.data;
+        const response = await axios.get(
+            "http://localhost:8000/api/barang-masuk"
+        );
+        borrows.value = response.data.data;
     } catch (error) {
         console.error("Gagal memuat data:", error);
     }
 });
 
 const deleteProduct = async (id) => {
-    if (confirm("Apakah Anda yakin ingin menghapus Produk ini?")) {
+    if (confirm("Apakah Anda yakin ingin menghapus Data ini?")) {
         try {
-            await axios.delete(`http://localhost:8000/api/produk/${id}`);
-            products.value = products.value.filter(
+            await axios.delete(`http://localhost:8000/api/barang-masuk/${id}`);
+            borrows.value = borrows.value.filter(
                 (product) => product.id !== id
             );
         } catch (error) {
@@ -30,79 +32,62 @@ const deleteProduct = async (id) => {
 <template>
     <Navbar />
     <div class="p-6">
-        <h2 class="text-2xl font-bold">Daftar Barang Keluar</h2>
+        <h2 class="text-2xl font-bold">Daftar Barang Masuk</h2>
         <div class="mb-4">
             <RouterLink
-                to="/produk/tambah"
+                to="/barang-masuk/tambah"
                 class="float-right mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             >
-                Tambah Produk Baru
+                Tambah Barang Masuk
             </RouterLink>
         </div>
         <table class="w-full border-collapse border border-gray-300">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="border px-4 py-2">No</th>
-                    <th class="border px-4 py-2">Nama Produk</th>
                     <th class="border px-4 py-2">Kode Produk</th>
-                    <th class="border px-4 py-2">Status Produk</th>
+                    <th class="border px-4 py-2">Nama Produk</th>
                     <th class="border px-4 py-2">Jumlah</th>
-                    <th class="border px-4 py-2">Harga</th>
-                    <th class="border px-4 py-2">Deskripsi</th>
+                    <th class="border px-4 py-2">Tanggal Masuk</th>
                     <th class="border px-4 py-2">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    v-for="product in products"
-                    :key="product.id"
-                    class="hover:bg-gray-50"
-                >
+                <tr v-for="(borrow, index) in borrows" :key="borrow.id">
+                    <td class="border px-4 py-2">{{ index + 1 }}</td>
+
+                    <!-- Relasi Product -->
                     <td class="border px-4 py-2">
-                        {{ products.indexOf(product) + 1 }}
+                        {{ borrow.product?.product_code }}
                     </td>
                     <td class="border px-4 py-2">
-                        {{ product.product_code }}
-                    </td>
-                    <td class="border px-4 py-2">{{ product.product_name }}</td>
-                    <td class="border px-4 py-2">
-                        <span v-if="product.product_status == 'available'"
-                            >Ada</span
-                        >
-                        <span v-else> Habis </span>
+                        {{ borrow.product?.product_name }}
                     </td>
                     <td class="border px-4 py-2">
-                        {{ product.qty }}
+                        {{ borrow.qty_incoming_items }}
                     </td>
                     <td class="border px-4 py-2">
-                        Rp
                         {{
-                            product.price
-                                ? product.price
-                                      .toLocaleString("id-ID", {
-                                          minimumFractionDigits: 0,
-                                          maximumFractionDigits: 0,
-                                      })
-                                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
-                                : "0"
+                            new Date(borrow.incoming_date).toLocaleString(
+                                "id-ID"
+                            )
                         }}
                     </td>
-                    <td class="border px-4 py-2">
-                        {{ product.description }}
-                    </td>
+
                     <td class="border px-4 py-2">
                         <RouterLink
-                            :to="`/produk/edit/${product.id}`"
-                            class="mr-3 px-2 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500"
+                            :to="`/barang-masuk/edit/${borrow.id}`"
+                            class="px-2 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500"
                         >
                             Edit
                         </RouterLink>
-                        <button
-                            @click="deleteProduct(product.id)"
+                        <!-- Depends on need -->
+                        <!-- <button
+                            @click="deleteData(borrow.id)"
                             class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                         >
                             Hapus
-                        </button>
+                        </button> -->
                     </td>
                 </tr>
             </tbody>

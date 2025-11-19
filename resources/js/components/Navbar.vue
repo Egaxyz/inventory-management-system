@@ -63,7 +63,7 @@
                 v-if="user.role == 'staff'"
             >
                 <button
-                    class="text-white hover:text-gray-600 hover:bg-white rounded-md p-1 font-medium flex items-center gap-1"
+                    class="text-white hover:text-black hover:bg-white rounded-md p-1 font-medium flex items-center gap-1"
                     @click="isOpen = !isOpen"
                 >
                     <span

@@ -77,8 +77,11 @@ const deleteData = async (id) => {
                     <td class="border px-4 py-2">
                         Rp
                         {{
-                            borrow.product?.price
-                                ? borrow.product?.price
+                            borrow.product?.price && borrow.qty_outgoing_items
+                                ? (
+                                      borrow.product.price *
+                                      borrow.qty_outgoing_items
+                                  )
                                       .toLocaleString("id-ID", {
                                           minimumFractionDigits: 0,
                                           maximumFractionDigits: 0,
